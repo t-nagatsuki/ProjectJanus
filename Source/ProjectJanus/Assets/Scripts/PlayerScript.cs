@@ -13,21 +13,27 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 
-        rigidbody.angularVelocity = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rigidbody.angularVelocity = new Vector3(0.0f, -1.0f, 0.0f);
+            rigidbody.angularVelocity = new Vector3(0.0f, -2.0f, 0.0f);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            rigidbody.angularVelocity = new Vector3(0.0f, +1.0f, 0.0f);
+            rigidbody.angularVelocity = new Vector3(0.0f, +2.0f, 0.0f);
         }
 
-        rigidbody.velocity = Vector3.zero;
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Vector3 cameraForward = Vector3.Scale(rigidbody.transform.forward, new Vector3(1, 0, 1)).normalized;
-            rigidbody.velocity = cameraForward * 1.0f;
+            rigidbody.AddForce( transform.forward * 12.5f );
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            rigidbody.AddForce( -transform.forward * 12.5f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rigidbody.AddForce( Vector3.up * 500 );
         }
     }
 }
